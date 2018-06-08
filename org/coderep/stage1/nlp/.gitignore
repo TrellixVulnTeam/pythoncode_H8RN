@@ -1,0 +1,9 @@
+.DS_Store
+*~
+[#].[#]
+.[#]*
+*[#]
+*pyc
+*.unk
+LM/RNNLM/model/model_small
+Seq2Seq/model/model_small
