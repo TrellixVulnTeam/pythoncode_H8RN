@@ -1,0 +1,6 @@
+﻿Postgresql启动报错
+解决方案：第一步：删除postgresql账号
+
+           第二步：重新添加postgresql账号
+  chown -R postgres:postgres /opt/quetzaco/database/pgsql/
+

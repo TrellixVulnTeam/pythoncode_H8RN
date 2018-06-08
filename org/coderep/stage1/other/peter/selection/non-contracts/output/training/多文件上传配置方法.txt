@@ -1,0 +1,3 @@
+﻿到目录/opt/quetzaco/quetapp/cfg/下，打开文件quetzacocfg.properties
+找到字段SWF_UPLOAD_ENABLE，将其对应的值改为ON如
+SWF_UPLOAD_ENABLE=ON

@@ -1,0 +1,28 @@
+﻿HOLA安装成功后，请根据服务器配置进行优化操作。
+
+1.	数据库优化
+
+修改/opt/quetzaco/database/pgsql/data/postgresql.conf 
+
+effective_cache_size：数据库能够使用的最大缓存，调整为物理内存的80% 
+shared_buffers：数据库通过该参数和内核以及磁盘交互，调整为物理内存10% 
+work_mem：排序操作会使用，设置为内存2%-4% 
+max_connections：根据work_mem做调整，两者相乘不应超过物理内存。
+
+修改完成需重启数据库。
+重启命令：/etc/init.d/postgresql restart
+
+2.	系统最大打开文件数优化
+
+编辑该 /etc/security/limits.conf，如果系统有相关参数请修改，没有请在文件末尾添加。
+
+*    soft        nofile    65536
+*    hard        nofile    65536
+*    soft        nproc    65536
+*    hard        nproc    65536
+
+修改完成需要重启服务器。
+重启命令：
+init 6 或者 reboot
+
+

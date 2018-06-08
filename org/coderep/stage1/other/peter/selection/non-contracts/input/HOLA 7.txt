@@ -1,0 +1,280 @@
+﻿HOLA 7.1（从HOLA 7.0.1升级）Windows升级手册
+ 
+1.	介绍
+2.	停HOLA服务
+3.	执行数据库备份&停数据库服务
+4.	重命名quetzaco 文件夹
+5.	检查旧HOLA系统的配置文件
+6.	安装新版HOLA
+7.	恢复数据库
+8.	应用数据库补丁文件
+9.	复制文档&查找索引文件
+10.	启动备份
+11.	复制许可
+12.	修改配置文件
+13.	启动HOLA服务
+14.	重建索引
+
+
+1. 介绍
+这个手册介绍在Windows服务器上，从HOLA 7.0.1到HOLA 7.1的升级过程。
+
+为了升级后成功运行，请按照手册定义的所有章节和步骤进行。
+
+返回索引
+
+
+2. 停HOLA服务
+为了做HOLA升级，您需要停掉所有HOLA服务。
+
+1.	打开命令行（cmd），输入下面命令，停掉HOLA所有相关服务。
+
+net stop hola
+net stop holamail
+net stop spamassassin
+net stop spamd
+net stop clamav
+net stop rsyncd
+net stop quetzacoconverter
+net stop quetzacoindex
+
+2.	打开Windows任务管理器，确保上面涉及到的所有进程都已经停掉。如果在任务
+管理器中您看到soffice.bin，soffice.exe，rsync.exe仍在运行，请将这些进
+程都强制关掉。
+
+返回索引
+
+
+3. 执行数据库备份&停数据库服务
+注意：将所有{disk}改为您HOLA安装的盘符，像C:或D:等。
+
+1.	进入下面文件夹：
+
+{disk}\opt\quetzaco\quetapp\tools\backup_util
+
+2.	找到并用编辑器打开dbautoexport.bat文件。
+
+3.	在dbautoexport.bat文件中找到backup_folder，将它设置为以下值如下（这是
+设置生成的数据库备份文件的位置）：
+
+backup_folder={disk}\opt\
+
+4.	还在dbautoexport.bat文件里面找到pg_dump.exe -h localhost，按下面内容
+进行修改：
+
+pg_dump.exe -h 127.0.0.1
+
+5.	保存dbautoexport.bat的所有修改信息。
+
+6.	运行dbautoexport.bat，执行数据库备份到预定义位置。
+　　
+7.	完成数据库备份后，到{disk}\opt\下，确保备份文件在这个文件夹中。备份文件
+名称如下：
+
+holadb_{星期三}.dmp
+
+注意：{星期三}会根据系统当前星期被替换，例如星期五。
+
+8.	完成备份后，输入如下命令停数据库服务：
+
+net stop postgresql
+
+返回索引
+
+
+4.	重命名quetzaco文件夹
+1.	进入下面文件夹：
+
+{disk}\opt
+
+2.	找到quetzaco文件夹，并重命名为quetzaco_old。
+
+返回索引
+
+
+5.  检查旧HOLA系统的配置文件
+您需要检查旧系统的配置文件，因为在安装新版HOLA过程中，需要调用其中信息。
+
+1.	用编辑器打开下面文件，找出主机和端口配置信息：
+
+{disk}\opt\quetzaco_old\quetapp\cfg\quetzacocfg.properties
+
+2.	用编辑器打开下面文件，找出应用服务器内存大小配置信息：
+
+{disk}\opt\quetzaco_old\base\WinDaemon\hola.ini
+
+3.	在hola.ini里面找到在–Xms（这个字符特指配给HOLA的最小内存）和–Xmx（这
+个字符特指配给HOLA的最大内存）后面的值。
+
+例如：如果您在安装时填-Xms512m -Xmx1024m，这个表明配给HOLA的内存，最小是
+512MB，最大是1024MB。
+
+注意：对于安装新版HOLA，知道旧系统的主机名，端口和配给内存这些配置信息是很
+重要的 – 这样才会和之前的系统有完全一样的配置。
+
+返回索引
+
+
+6.	安装新版HOLA
+1.	挂载HOLA 7.1镜像文件
+
+2.	运行setup.exe启动安装向导。
+
+3.	在安装过程中，像往常一样填写安装向导。主机名，端口，配给内存这些配置信息，
+按您旧的HOLA系统安装程序填写（参阅 检查旧HOLA系统的配置文件章节）
+
+4.	停hola和holamail服务：
+
+net stop hola
+net stop holamail
+
+返回索引
+
+
+7.	恢复数据库
+1.	打开cmd，运行下面命令：
+
+cd {disk}\opt\quetzaco\database\pgsql\bin
+
+2.	删除现在的数据库（这个是安装过程创建的数据库）
+
+dropdb –U postgres –h 127.0.0.1 quetzaco
+
+3.	创建新数据库
+
+createdb –U postgres –h 127.0.0.1 –E UNICODE quetzaco
+
+4.	恢复备份数据库到新建立的数据库中
+
+pg_restore –h 127.0.0.1 -p 5432 -U postgres -d quetzaco –v {disk}:\opt\ 
+holadb_{weekday}.dmp
+
+返回索引
+
+
+8.	应用数据库补丁文件
+数据库补丁文件不是安装包的一部分，是分开提供的。这个补丁文件名是
+updateTo71.zip。
+
+1.	复制updateTo71.zip文件到{disk} – 与安装的新版HOLA同一个盘符（确切位置
+并不重要。）
+
+2.	解压updateTo71.zip文件，进入updateTo71文件夹。
+
+3.	在updateTo71文件夹里面，找到文件executePatch.bat，并用编辑器打开。
+　　
+4.	在executePatch.bat文件里面，找到SET ROOT_PATH={disk}，将{disk}改为您
+安装HOLA系统的盘符。
+　　
+5.	保存修改到executePatch.bat文件。 
+　　
+6.	双击执行executePatch.bat文件。
+
+返回索引
+
+
+9. 复制文档&查找索引文件
+1.	进入下面文件夹：
+
+{disk}\opt\quetzaco_old
+
+2.	在这个文件夹里面，找到docs文件夹和quetzacoindex文件夹，复制两个文件夹
+到新HOLA安装路径：{disk}\opt\quetzaco\
+
+返回索引
+
+
+10. 启动备份
+如果您旧的HOLA系统有启动自动备份，同样方式（执行备份手册）也检查下新系统备
+份是否正常。查看管理员手册了解更多关于怎么启动HOLA备份。
+
+返回索引
+
+
+11. 复制许可
+1.	进入下面文件夹：
+
+{disk}\opt\quetzaco_old\quetapp\cfg\lic
+
+2.	复制这个文件夹下的全部内容到您的新HOLA安装目录 – 进入如下路径：
+
+{disk}\opt\quetzaco\quetapp\cfg\lic
+
+返回索引
+
+
+12. 修改配置文件
+1.	用编辑器打开下面文件：
+ 
+{disk}\opt\quetzaco\quetapp\cfg\quetzacocfg.properties
+
+2.	找到并修改 GWT_TPL 的值为如下所示:
+
+GWT_TPL=OFF
+
+3.	找到并修改 CREAT_CACHE_BEFORE_CREAT_HOLA_BASEMODEL的值为如下所示:
+
+CREAT_CACHE_BEFORE_CREAT_HOLA_BASEMODEL=OFF
+
+4.	找到INDEX_CONTENT_FORMAT，删除值中如下内容 :
+
+dwg,dwf
+
+5.	找到 QUETZACO_CURL_PUBLISH ，并在下方添加如下内容:
+
+QUETZACO_OUT_CURL_PUBLISH=http://localhost:80/curl/curl?curl=
+
+6.	在此配置文件的最下方添加如下内容:
+
+SESSION_SERVER_ADDRESS=127.0.0.1
+SESSION_SERVER_PORT=8888
+
+#ON : <default>  every one can create/edit/delete/manage tags
+#OFF: only role as orgadmin or sysadmin can  create/edit/delete/manage 
+tags
+TAG_MANAGEMENT=ON
+
+#redis 
+REDIS_PATH=127.0.0.1
+REDIS_PID=6379
+
+SEARCH_FILTER=ON
+
+
+返回索引
+
+
+13. 启动HOLA服务
+1.	打开cmd，启动如下HOLA服务：
+
+net start hola 
+net start holamail
+
+返回索引
+
+
+14. 重建索引
+1.	进入下面的文件夹并运行 MainTool.bat 
+
+{disk}\opt\quetzaco\quetapp\tools\MainUtil\
+
+2.	在打开的窗口中，选择 工具 >> 索引工具。
+
+
+ 
+
+
+3.	在这个窗口中，选择 重新建立所有索引  选项，并点击确定。
+ 
+
+ 
+
+
+4.	进度条至100%表示索引建立完成。
+
+
+ 
+
+
+返回索引
+

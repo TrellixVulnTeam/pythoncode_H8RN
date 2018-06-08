@@ -1,0 +1,72 @@
+﻿HOLA升级方案
+
+
+一.	确保备份文件为最新。查看数据库脚本，并执行
+
+数据库备份脚本：
+/opt/quetzaco/quetapp/tools/backup_util/dbautoexport.bat
+
+备份完成后，根据备份文件设置的备份路径，查看备份时否成功
+
+二.停掉hola等相关的服务
+
+停止 hola、holamail等服务
+
+三.重命名quetzaco文件为quetzacobak
+
+
+四.拷贝hola安装包到服务器，安装hola
+
+参考HOLA安装手册，安装HOLA
+安装完成后停止HOLA
+
+五.删除新数据库，创建新库，恢复数据库，并打上数据库补丁
+
+1、进入数据库bin目录：
+cd /opt/quetzaco/database/pgsql/bin	
+
+2、重命名新安装的数据库：
+alter database quetazaco rename to old_quetzaco;
+    
+3、创建数据库quetzaco：
+createdb -U postgres -E UNICODE quetzaco  
+
+4、恢复备份文件：
+pg_restore -h localhost -p 5432 -U postgres -d quetzaco -v 备份文件
+
+5、给数据打升级补丁：
+psql -U postgres -d quetzaco -f 补丁文件
+
+六.将旧版HOLA数据文件拷贝到新版HOLA 
+
+进入\opt\quetzacobak目录
+拷贝docs目录，到新版HOAL对于路径下
+
+七.用hola tools工具建立索引
+
+参照HOLA工具手册
+工具目录/opt/quetzaco/quetapp/tools/MainUtil/MainTool.bat
+
+八.设置新备份脚本，并手动执行，到相关目录查看执行结果
+
+数据库备份脚本:
+/opt/quetzaco/quetapp/tools/backup_util/dbautoexport.bat
+
+九.将备份脚本加入开机启动项
+
+参照win/Linux备份工具使用说明
+
+十.将旧版hola的lic文件拷贝到新的安装的hola目录中
+
+lic目录：
+\opt\quetzaco\quetapp\cfg\lic 
+
+十一.根据旧版本配置文件，修改新安装hola的配置文件
+
+进入 \opt\quetzaco\quetapp\cfg\目录
+1、将新版HOLA的quetzacocfg文件和旧的quetzacocfg文件对照，有新的功能
+就添加到旧的quetzacocfg文件中
+
+2、将新cfg文件重命名_bak,然后将更新后的旧版本的cfg文件，拷贝到新hola
+的目录下
+

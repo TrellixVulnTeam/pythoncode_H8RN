@@ -1,0 +1,8 @@
+﻿本地安装HOLA，IP变更导致无法登录HOLA
+修改IP：1.opt/quetzaco/quetapp/cfg/quetzacocfg.prgperties文件,将里面的
+IP全部改为现有IP，如图1:  
+ 图1
+2.opt/quetzaco/base/WinDaemon/HOLA.ini文件，将“指定命令行”下的hostname修改为
+当前计算机IP就可以 如图2:。
+ 图2	
+

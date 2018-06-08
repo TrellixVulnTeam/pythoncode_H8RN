@@ -1,0 +1,101 @@
+﻿客户网络硬件及设备调查表
+Client Internet and Hardware Info
+服务器信息（Server Info）
+操作系统
+Operating System
+
+品牌
+Brand
+
+内存 RAM（容量*个数）
+
+ 硬盘 HD（容量*个数）
+
+双机热备
+Backup Server
+是(Yes)□
+否(No)□
+
+
+RAID
+是(Yes)□
+否(No)□
+类型
+　Type
+
+网络信息(Internet Info)
+内网IP
+LAN IP
+
+外网IP
+Public IP
+固定IP□
+Fixed IP
+
+动态IP□
+　　Dynamic IP
+服务器网卡物理地址
+Mac Address
+
+域名
+Domain Name
+
+帐号
+Account
+
+密码
+Password
+
+服务器位置
+Server Location
+公司机房□
+ Company
+托管□
+　IDC
+其它□
+Others
+
+接入类型
+　　Connection Type
+ADSL□
+光纤□
+Fiber
+其它□
+Others
+
+带宽
+　　Connection Speed
+
+线路
+           ISP
+电信□
+ChinaTelecom
+网通□
+　CNC
+双线□
+Both
+
+防火墙情况
+Firewall
+
+　　　　　　　　　　HOLA信息(HOLA Info)
+HOLA端口
+80□
+其它□
+
+HOLA主机名
+
+　　　　　备注
+         Remark
+
+
+
+
+
+
+ We Document Your Success
+
+德雅科技
+电话：+86.10.6501.3753  ┃  传真：+86.10.6593.1605┃ http://www.deyatech.com
+Copyright© 2004 - 2007 DEYA TECH Co. Ltd.  德雅科技 版权所有
+

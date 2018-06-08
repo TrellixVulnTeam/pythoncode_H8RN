@@ -1,0 +1,10 @@
+encrypt
+file
+for
+uploading
+on
+decrypt
+file
+for
+downloading
+on

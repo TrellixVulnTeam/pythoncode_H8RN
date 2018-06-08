@@ -1,0 +1,163 @@
+﻿   
+
+   
+   
+   
+   
+   
+   
+   
+   
+　Hola备份（windows）
+   
+   
+   
+   
+   
+一．	数据库备份	2
+二．	真实数据文件以及索引文件的备份	7
+附录：	9
+   
+   
+   
+   
+   
+   
+   
+   
+   德雅科技
+     Tel: +86(10) 6501 3753
+     Fax: +86(10) 6593 1605
+     http://www.deyatech.com
+一．	数据库备份
+　　1．编辑安装磁盘下\opt\quetzaco\quetapp\tools\backup_util\dbautoexport.bat文件 如下图：
+　　 
+　　图1
+　　注释：
+　　(1) set ROOT_DISK=D:  这里需要修改“D：”为实际安装的磁盘
+　　set backup_folder=%ROOT_DISK%\opt\quetzaco\backup
+　　(2) “%ROOT_DISK%\opt\quetzaco\backup” 修改为实际备份存放路径
+　　例如要备份到E盘的hola_backup目录，可修改为：E:\hola_backup
+　　(3) D:\opt\quetzaco\database\pgsql\bin\pg_dump.exe -h localhost -p 5432 -U postgres -F c -b -v -f 
+"%backup_folder%\holadb_%date:~11,6%.dmp" quetzaco
+　　需修改“D：”为实际安装的磁盘
+　　
+　　2．把\opt\quetzaco\quetapp\tools\backup_util\dbautoexport.bat添加到windows的计划任务中
+，定时执行，进行数据库备份  如下图：
+　　 
+　　图2
+　　  
+
+　　图3
+　　双击添加任务计划
+　　 
+　　图4
+　　 
+　　图5
+　　 
+　　图6
+　　 
+　　图7
+　　注：如上图每天执行备份
+　　 
+　　图8
+　　注：如上图每天20：00执行备份
+　　 
+　　图9
+　　注：输入windows系统用户“administrator”的密码
+　　 
+　　图10
+　　注：点击“完成”按钮，完成计划任务设置
+　　 
+　　图11
+　　注：手动运行确认正确执行
+　　 
+　　图12
+　　注：到备份目录察看备份文件以及备份日志
+　　
+二．	真实数据文件以及索引文件的备份
+　　1．备份前确定备份路径以及备份时间
+　　例如要把hola的数据库备份以及数据文件，索引文件，每天凌晨1：30自动备份放到
+E:\hola_backup下
+　　2．修改备份路径
+　　修改\opt\quetzaco\quetapp\tools\RsyncClient\cfg\backupClientService.xml 修改后如下
+图：
+　　 
+　　图1
+　　注：图中红色圈出的分别为真实数据文件备份路径，数据库备份路径，索引文件备份路径，可
+根据具体情况进行修改 这样hola就会吧备份放到E:\hola_backup下，并分别创建docs，
+backup，quetzacoindex三个目录，分别存放数据备份，数据库备份和索引的备份。
+　　3．修改备份时间
+　　配置文件路径：\opt\quetzaco\quetapp\tools\RsyncClient\cfg\crontab.xml 修改后如下图
+：
+　　 
+　　图2
+　　如上图配置就会再凌晨一点半进行自动备份具体参数含义见“附录”第三部分
+　　4．执行备份
+　　执行路径：\opt\quetzaco\quetapp\tools\RsyncClient\start.bat
+　　双击start.bat会打开一个docs窗口显示working
+　　不要关闭这个窗口，等到了设定时间，程序会自动运行备份。
+　　
+　　附录：
+　　1、Rsync的主配置文件
+　　主配置文件路径：\opt\quetzaco\rsync\etc\rsyncd.conf 如下图：
+　　 
+　　图1
+　　
+　　选中部分为真实数据文件目录的定义 红线标出部分依次解释如下：
+　　1>、use chroot = false：不使用chroot
+　　2>、max connections = 4：客户端最大连接数为4
+　　3>、pid file = \opt\quetzaco\rsync\tmp\rsyncd.pid：进程号存放文件路径
+　　4>、log file = \opt\quetzaco\rsync\tmp\rsyncd.log：日志存放路径
+　　5>、path = /cygdrive/e/opt/quetzaco/docs/：需要备份文件的路径
+　　6>、read only = yes：只读的方式备份
+　　7>、list = no：不允许列文件
+　　8>、auth users = quetzaco-security：认证的用户名
+　　9>、secrets file = /cygdrive/e/opt/quetzaco/rsync/etc/quetzaco-security.pas：认证文
+件路径
+　　
+　　2、客户端配置文件
+　　配置文件路径：\opt\quetzaco\quetapp\tools\RsyncClient\cfg\backupClientService.xml
+　　配置文件分为三个部分，分别是备份hola的数据库，真实文件，和索引文件，是以<service-
+config>……</service-config>为分割 如下图：
+　　 
+　　图2
+　　
+　　图中选中部分为备份真实文件部分，依次解释如下：
+　　1>、<backup-module>quetzaco</backup-module>： quetzaco是一个备份标示，对应到
+\opt\quetzaco\rsync\etc\rsync.conf下的[quetzaco]的定义部分
+　　2>、<rsync-path>/opt/quetzaco/rsync/bin/rsync</rsync-path>：指明rsync程序运行路径
+　　3>、<password-path>./cfg/quetzaco.pas</password-path>：指明密码文件路径
+　　4>、<server-ip>localhost</server-ip>：备份主机ip地址，因为是本地所以标示为
+localhost
+　　5>、<backup-path>/opt/quetzaco/rsync_backup/docs</backup-path>：备份到目标文件夹的
+路径
+　　
+　　3、定时备份：
+　　配置文件路径：\opt\quetzaco\quetapp\tools\RsyncClient\cfg\crontab.xml 内容如下图:
+　　 
+　　图3
+　　
+　　1>、<seconds>59</seconds>：秒，范围（0-59）
+　　2>、<minutes>*</minutes>：分 范围（0-59）
+　　3>、<hours>*</hours>：时 范围（0-23）
+　　4>、<daysofmonth>*</daysofmonth>：天 范围（1-31）
+　　5>、<months>*</months>：月 范围（1-12）
+　　6>、<daysofweek>*</daysofweek>：星期 范围（0-6 0为星期天）
+　　7>、<years>*</years>：年
+　　例如：每天的凌晨2点30分开始备份如下图所示：
+　　 
+　　图4
+　　
+　　
+
+                                                                                                                                                               
+
+                                                                                                                                                              We Document Your Success
+
+
+
+     德雅科技
+　　　电话：+86.10.6501.3753  ┃  传真：+86.10.6593.1605┃ http://www.deyatech.com
+Copyright© 2004 - 2009 DEYA TECH Co. Ltd.  德雅科技 版权所有
+	                                                                                                                                                                 第 1 页 共 1 页

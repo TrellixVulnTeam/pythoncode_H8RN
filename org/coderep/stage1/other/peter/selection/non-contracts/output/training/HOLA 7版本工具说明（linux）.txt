@@ -1,0 +1,111 @@
+﻿一、	介绍
+
+　　HOLA系统内置了一些实用工具，这些工具方便了用户初期使用HOLA系统
+的工作量，节约了工作时间，可以让用户更快的使用上HOLA。
+
+这些工具存放在/opt/quetzaco/quetapp/tools/目录下，包括：
+1）	备份工具
+2）	导入工具
+3）	索引工具
+
+二、	备份工具操作说明
+
+　　HOLA采用的rsync的增量备份的方式进行备份数据，每次备份时只会将上
+次备份后发生改变或者新增的内容进行同步备份，这样做显著的提升了备份效率，
+节省程序了对系统资源占用。
+
+　　rsync 是一个UNIX/LINUX系统下的文件同步和传输工具。它使用“rsync算法”
+提供了一个客户机的远程服务器的文件同步的快速方法。
+
+1.	如果你的LINUX操作系统中没有安装xinetd服务，需要先进行安装，执行命
+令如下：
+   #yum install xinetd
+	
+2.	进入工具存放目录：
+   #cd /opt/quetzaco/quetapp/tools/backup_util/
+3.	启动rsync服务：
+   #sh setupRsyncd.sh
+4.	配置备份数据库的频率：
+   #sh setupDB.sh
+   当执行这个脚本的时候回打开以下界面：
+　　---------------------------------------------------------------
+　　HOLA Database Backup Configuration
+　　---------------------------------------------------------------
+　　Please input your choice of the backup Frequency:
+　　A: Do the backup everyday
+　　B: Do the backup once a week
+　　C: Do the backup once a month
+　　Q: Exit the backup configuration
+　　Your input [A, B , C or Q]:
+
+分别是A 每天备份 B 每星期备份 C 每月备份 D 退出备份设置
+如果选择A 每天备份，则会让你输入每天的备份时间
+例：如果计划每天的凌晨三点进行备份则输入03：00，之后是让你输入备份的
+路径，默认路径为：/opt/quetzaco/dbbackup
+当这个脚本执行成功后在crontab中会自动生成一条计划任务
+#crontab –l
+00 03 * * * /opt/quetzaco/quetapp/tools/backup_util/exportdb.sh 
+/opt/quetzaco/dbbackup
+也可以手动执行一次进行一下测试
+#/opt/quetzaco/quetapp/tools/backup_util/exportdb.sh 
+/opt/quetzaco/dbbackup
+然后到/opt/quetzaco/dbbackup下查看生成的备份文件
+
+5.	启动RSYNC服务的客户端，自动在某个时间段进行备份：
+#sh setupQuetzacoSync.sh localhost /opt/quetzaco/quetapp/tools/backup_util/ 
+/backup/
+注：localhost 指明备份到哪台主机
+/opt/quetzaco/quetapp/tools/backup_util/ 指明密码文件读取路径
+/backup/ 指明备份路径
+#crontab –l 会生成一条计划任务
+00 05 * * * /opt/quetzaco/quetapp/tools/backup_util/quetzacoSync.sh localhost 
+/opt/quetzaco/quetapp/tools/backup_util /backup
+
+三、	批量导入工具说明
+
+1、进入工具存放路径
+#cd /opt/quetzaco/quetapp/tools/import_util/
+
+2、执行批量导入工具，空格后跟要导入文件夹所在路径
+#sh import.sh “要导入的文件夹路径”
+例：
+#sh import.sh /mnt/documents 
+执行后会提示你输入HOLA用户的用户名和密码，最好使用普通用户的身份进行
+导入操作，如果使用管理员用户导入那么其他用户就不可见了。
+然后根据提示选择工作区，文档柜，文件夹，最后开始导入。
+导入完成后可以登录到HOLA系统中查看。
+注：
+#sh import.sh /mnt/documents 在所导入的路径中会documents文件夹。
+#sh import.sh /mnt/documents/ 则不会创建documents文件夹，只是把
+documents文件夹下的文件或目录导入到HOLA系统中。
+
+四、	索引工具说明
+
+1.	使用admin账户登陆HOLA http://***.***.***.***/hola/admin 
+选择左上方的“配置管理”在弹出对话框中，选择左侧自动索引。在右侧选项
+中选择否。
+2.	进入索引工具目录。
+#cd /opt/quetzaco/quetapp/tools/MainUtil/
+3.	执行索引工具
+#sh MainTool.sh
+出现的命令窗口选项，
+　　********************Welcome To Use HOLA Tools.********************
+　　        A.----------Import Tool
+　　        B.----------Convert Tool
+　　        C.----------Index Tool
+　　        D.----------Secure Tool
+　　        E.----------ExportDb Tool
+Please select a tool:
+输入C
+出现索引说明
+　　You can choose to continue the last indexing or restart a new indexing:
+　　press [R/r] to Rebuild the all index.
+　　press [A/a] to use append mode, it will only index the unindex documents.
+　　press [Q/q] to Quit.
+Select a index type:
+输入R。输入后命令行会显示索引创建进度条，索引工具即开始工作。
+注：
+R/r是重新建立所有索引。
+A/a只会将没有创建的索引追加创建。
+Q/q 退出索引工具。
+

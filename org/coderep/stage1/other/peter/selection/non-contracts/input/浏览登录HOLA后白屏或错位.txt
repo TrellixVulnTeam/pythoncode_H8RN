@@ -1,0 +1,11 @@
+﻿浏览登录HOLA后白屏，或错位.
+方案1.IE与HOLA兼容性问题，有时用户IE浏览器版本过高导致显示错位或是不显示
+使用IE的兼容性视图模式去浏览HOLA,
+方案2.另一种可能：如果是初次安装，可能是安装端口被其他进程占用了,所以安装钱要检
+查端口是否被占用,如果已经出现白屏情况，我们进入目录
+D:\opt\quetzaco\quetapp\server\default\deploy\jboss-web.deployer，找到server.xml文件 将里面
+的端口全部替换即可
+方案3.由于账户登录错误,没有启动postgreSQL数据库,我们可以进入服务，手动启动
+postgreSQL数据库,启动后，再登录HOLA
+方案4.将HOLA地址加入到浏览器安全站点中。
+

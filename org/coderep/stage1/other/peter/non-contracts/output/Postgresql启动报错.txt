@@ -1,0 +1,1 @@
+{"label": "non-contract", "body": ["postgresql", "\u542f\u52a8", "\u62a5\u9519", "\u89e3\u51b3\u65b9\u6848", "\u7b2c\u4e00\u6b65", "\u5220\u9664", "postgresql", "\u8d26\u53f7", "\u7b2c\u4e8c\u6b65", "\u91cd\u65b0", "\u6dfb\u52a0", "postgresql", "\u8d26\u53f7", "chown", "postgres", "postgres", "opt", "quetzaco", "database", "pgsql"]}

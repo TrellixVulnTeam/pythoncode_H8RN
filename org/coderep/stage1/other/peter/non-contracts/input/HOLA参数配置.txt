@@ -1,0 +1,537 @@
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+　　　　　　　　　　
+
+HOLA系统配置参数说明
+
+
+
+
+
+
+
+
+
+
+德雅科技
+Tel: +86(10) 6501 3753
+Fax: +86(10) 6593 1605
+http://www.deyatech.com
+
+2009
+
+
+配置参数列表
+目录
+1.	修改版本号	3
+2.	修改MAIL通知的URL	3
+3.	修改MAIL服务器	3
+4.	修改会话超时时间(单位:毫秒)	3
+5.	修改管理员邮箱地址	3
+6.	修改用户创建的默认密码	3
+7.	修改文件夹下最大文件数量：	3
+8.	修改邮件服务器绑定的域名	4
+9.	修改错误的返回信息	4
+10.	设置是否允许外部邮件	4
+11.	修改欢迎信息	4
+12.	修改显示最大行数	4
+13.	设置JAVA数据库连接池	4
+14.	设置CURL链接的有效期	4
+15.	设置Velocity 的vm文件存放路径	4
+16.	设置HOLA的版本(One/Blue/Gold)	5
+17.	设置模板是否保存	5
+18.	设置反垃圾邮件服务器及端口号	5
+19.	设置邮件病毒扫描服务器及端口号	5
+20.	设置系统级的邮件黑名单列表	5
+21.	设置文档路径的流程图显示的节点名称(已过期)	5
+22.	设置默认字符集	5
+23.	文件夹中是否可以有相同文件标题的文件存在的设置	6
+24.	设置是否显示中间名（针对一些纯外国企业应用）	6
+25.	设置邮件服务器的伪装域名	6
+26.	设置FULL_NAME支持	6
+27.	设置自动创建检索索引信息（批量导入时设为N可提高速度）	6
+28.	是否支持SSO (单点登录模块)	6
+29.	设置默认可下载文件类型的扩展名（逗号分隔）	6
+30.	设置登录名为email地址时所使用的邮件地址类型	7
+31.	设置鼠标双击对文件的操作	7
+32.	设置鼠标双击对用户的操作	7
+33.	设置鼠标双击对任务的操作	7
+34.	对文档柜或文件夹的操作	7
+35.	邮件退信设置	7
+36.	JCRONTAB的配置文件路径	8
+37.	集群的配置	8
+38.	集群节点的配置	8
+39.	支持转换成pdf格式的文件类型扩展名列表	8
+40.	是否对查询结果进行权限过滤	8
+41.	CACHE ROOT的工作目录	8
+42.	对非活动目录的修改	8
+43.	是设置是否可以改变文件的所有者	8
+44.	设置是否新的DOCNUMBER覆盖旧的DOCNUMBER	9
+45.	对文件优先级的设置	9
+46.	智能文件夹归档	9
+47.	单次最大上传限制	9
+48.	单个文件最大上传限制	9
+49.	上传文档时是否开启病毒扫描	9
+50.	在创建索引之前将文档转换为pdf	9
+51.	9
+52.	当目标文件夹不存在时，是否发送失败消息（ON每次都发送，OFF只在第一次发送）	10
+53.	Fuzzy，模糊查找。Exact，精确查找	10
+54.	高级搜索是否包含子文件夹	10
+55.	10
+56.	是否开启在线预览功能	10
+57.	用viewer在线打开附件	10
+58.	10
+59.	默认搜索模式	10
+60.	允许通过外部工具从pdf文件提取文本，且服务器字符编码为utf-8	11
+61.	在用户退出系统时是否清除用户会话	11
+62.	显示或隐藏日历模块	11
+63.	将mail转换为pdf	11
+64.	是否分离附件	11
+65.	是否开启ereview功能（ereview在线打开cad图纸插件）	11
+66.	在线预览视频	11
+67.	自定义报表路径	12
+68.	加密参数配置	12
+69.	是否使用中文字典	12
+70.	AUTOVUE参数配置	12
+71.	是否开启webdav功能	12
+72.	文件转换服务器参数配置	12
+73.	OCR参数配置	12
+74.	是否开启集成登录	13
+75.	在线编辑参数配置	13
+76.	13
+77.	下载pdf是是否加水印	13
+78.	Windows弹窗设置	13
+79.	13
+80.	中信定制	13
+81.	中信定制	13
+82.	点开组织的时候右侧是否直接显示已有的组织	14
+83.	Webdav最大上传线程	14
+84.	打开与RTX的开关	14
+85.	RTX参数配置	14
+86.	SMS参数配置	14
+87.	是否开启单点域验证登录	14
+88.	Mail服务器参数配置	14
+89.	借阅相关	15
+90.	Soaffice模板路径	15
+91.	文档编号替换文件名	15
+92.	在pdf下载是加上客户端的ip水印	15
+93.	检验所定制	15
+94.	是否开启用户磁盘限额功能	15
+95.	ISO参数配置	15
+96.	开启ISO功能	15
+97.	HOLA支持的附件格式	16
+98.	Swf上传方式的开启和允许的最大限制	16
+99.	在线预览方式	16
+100.	Curl支持gwt	16
+101.	队列参数配置	16
+102.	ISO邮件模板	16
+103.	Soaoffice支持的格式	16
+104.	以什么身份向rtx方发送消息	16
+105.	智能截取文档名填充索引卡	17
+106.	17
+107.	在工具栏右边添加一个“报告”按钮	17
+108.	转换文档的方式（ON为队列OFF为线程）	17
+109.	ISO文档过期提醒时间	17
+110.	ISO logo的宽度和高度	17
+111.	ISO首页电子签名参数配置（只对pdf有效）	17
+112.	允许登录wendav的用户	17
+113.	只允许组织管理员删除组织中的文档柜，文件夹，文档	18
+114.	NTKO插件是否开启	18
+115.	Pdf转swf超时时间	18
+
+
+
+
+
+
+
+
+在安装目录/opt/quetzaco/quetapp/cfg/ 下存放了一些常用的配置文件，该文档主要说明配置文件
+/opt/quetzaco/quetapp/cfg/quetzacocfg.properties 相关配置参数：
+1.	修改版本号
+PRODUCT_VERSION=5.4
+BUILD_VERSION=5.4.x
+2.	修改MAIL通知的URL
+QUETZACO_URL=http://hola.sina.com:80/hola
+3.	修改MAIL服务器
+QUETZACO_MAIL_SERVER=localhost
+4.	修改会话超时时间(单位:毫秒)
+QUETZACO_SESSION_TIMEOUT=1800000
+5.	修改管理员邮箱地址
+SYS_ADMIN_EMAIL=admin@hola.sina.com
+6.	修改用户创建的默认密码
+DEFAULT_PASSWORD=
+注：如果该项设置为空，则表示HOLA用户创建时默认没有密码，当新用户登录时需要经过想应的设置。
+RESET_LOGIN=N
+当该项设置为NO后用户在第一次登录的时候就不会看到设置密码的页面了。 
+7.	修改文件夹下最大文件数量：
+CHECK_IN_MAX_COUNT=2048
+
+8.	修改邮件服务器绑定的域名
+INTERNAL_DOMAIN_NAME = hola.deyatech.com
+EXTRA_DOMAIN_NAME=hola.deyatech.com
+9.	修改错误的返回信息
+POSTMASTER_ERROR_MSG = Sorry! The Following Mail Ids are Not Found. I don't know where to 
+send the mails
+10.	设置是否允许外部邮件
+ALLOW_EXTERNAL_EMAIL=true
+注：true为允许，false为不允许
+11.	修改欢迎信息
+QUETZACO_WELCOME_MESSAGE_SUBJECT=Welcome to Hola!
+12.	修改显示最大行数
+MAXIMUM_ALLOWED_ROWS=30
+13.	设置JAVA数据库连接池
+DATA_SOURCE=java:/PostgresDS
+14.	设置CURL链接的有效期
+CURL_EXPIRY=90
+15.	设置Velocity 的vm文件存放路径
+VM_ TEMPLATE _PATH=/server/default/deploy/hola.war/templates/
+
+16.	设置HOLA的版本(One/Blue/Gold)
+FLAVOR_DEFAULT_TYPE=One
+注：已经过期。
+17.	设置模板是否保存
+START_BP=N
+CACHE_BP_FORMS=Y
+18.	设置反垃圾邮件服务器及端口号
+SPAM_ASSASSIN_HOST = localhost
+SPAM_ASSASSIN_PORT = 783
+19.	设置邮件病毒扫描服务器及端口号
+ANTIVIRUS_HOST=localhost
+ANTIVIRUS_PORT=3310
+20.	设置系统级的邮件黑名单列表
+SYSTEM_LEVEL_BLOCK_LIST=,,
+21.	设置文档路径的流程图显示的节点名称(已过期)
+APPROVE=Approve
+REVIEW=Review
+FYI=FYI
+MODIFY=Modify
+DISAPPROVE=Disapprove
+START=Start
+22.	设置默认字符集
+ENCODING=UTF-8
+CLIENT_ENCODING=GBK
+
+23.	文件夹中是否可以有相同文件标题的文件存在的设置
+DUPLICATE_DOC_TITLE=OFF
+注：OFF为不可以，ON为可以。
+24.	设置是否显示中间名（针对一些纯外国企业应用）
+SHOW_MIDDLE_NAME=OFF
+25.	设置邮件服务器的伪装域名
+EMAIL_REPLY_DOMAIN=
+26.	设置FULL_NAME支持
+FULL_NAME_SUPPORT=N
+27.	设置自动创建检索索引信息（批量导入时设为N可提高速度）
+AUTO_ADD_INDEX=Y
+注：设定为Y时当用户上传新的文件会自动建立索引，设定为N时则不会建立索引。
+28.	是否支持SSO (单点登录模块)
+SSOSUPPORT=FALSE
+29.	设置默认可下载文件类型的扩展名（逗号分隔）
+DOWNLOAD_FILE_TYPE=
+注：多个添加时用逗号隔开。
+
+
+
+
+
+
+
+
+
+30.	设置登录名为email地址时所使用的邮件地址类型
+LOGIN_EMAIL_TYPE=
+注：可使用的选项有PRIMARY_EMAIL和DOMAIN_EMAIL，使用PRIMARY_EMAIL则用户可使用任意其他
+邮箱登录，使用DOMAIN_EMAIL则只能使用本地域邮箱登录，什么也不填默认使用的DOMAIN_NAME.
+31.	设置鼠标双击对文件的操作
+DBLCLICK_ACTION=view
+注：有view和download两个选项，使用view则会双击后通过浏览器打开文件，使用download则会双击打
+开一个下载页面。
+32.	设置鼠标双击对用户的操作
+DBLCLICK_CONTACT_ACTION=view
+注：有edit和view两个选项，如果使用edit选项，在鼠标双击用户时则会弹出一个编辑对话框，如果使用
+view选项则只是查看。
+33.	设置鼠标双击对任务的操作
+DBLCLICK_TASK_ACTION=view
+注：有edit和view两个选项，如果使用edit选项，在鼠标双击则会弹出一个编辑对话框，如果使用view选项
+则只是查看。
+34.	对文档柜或文件夹的操作
+EXPAND_DOCUMENT_TREEVIEW=Y
+注：当选择Y时，鼠标双击打开右边的文件夹左边的目录树会自动打开。N则不打开。
+35.	邮件退信设置
+REJECT_MESSAGE_NO_WAIT=OFF
+注：一般邮件在发送的时候，一次发送不成功还会继续进行三到五次的发送尝试，如果还不能正常发送，则把邮
+件退回（系统退信）。 把该项修改为OFF则表示关闭该功能，一次发送不成功，就不再继续尝试。
+
+36.	JCRONTAB的配置文件路径
+JCRONTAB_CONFIG=/opt/quetzaco/quetapp/cfg/jcrontab.properties
+37.	集群的配置
+IN_CLUSTER_ENVIRONMENT=N
+注：如果HOLA是工作在集群中，则选择Y
+38.	集群节点的配置
+CLUSTER_NODES=,,
+39.	支持转换成pdf格式的文件类型扩展名列表
+CONVERT_DOCUMENT_FORMAT=doc,xls,ppt,txt,htm,html
+40.	是否对查询结果进行权限过滤
+CHECK_PERMISSION_FOR_SEARCH=ON
+41.	CACHE ROOT的工作目录
+QUETZACO_CACHE_ROOT=/opt/quetzaco/cache
+42.	对非活动目录的修改 
+SHOW_DEACTIVE_PROJECTS=OFF
+注：如果为OFF则不可见，如果为ON则可见但不能进行修改。
+43.	是设置是否可以改变文件的所有者
+OWNER_FOR_DMS=ON
+44.	设置是否新的DOCNUMBER覆盖旧的DOCNUMBER
+KEEP_DOCNUMBER_VALUE=ON
+45.	对文件优先级的设置
+SMARTFOLDER_WITH_PRIORITY=ON
+注： 当为ON时文件只能有一个最高的优先级，当为OFF时，文件可有多个优先级。
+46.	  智能文件夹归档
+SMARTFOLDER_KEEP_EMPTYDOCUMENT=ON  （ON空的不归档，OFF空的也归档）
+47.	单次最大上传限制 
+MAX_ONCE_UPLOAD_SIZE=1048576000
+48.	单个文件最大上传限制 
+MAX_EACH_FILE_UPLOAD_SIZE=1048576000
+49.	上传文档时是否开启病毒扫描
+IS_SCAN_VIRUS=OFF
+50.	在创建索引之前将文档转换为pdf 
+CONVERT_DOCUMENT_FOR_INDEX=ON  （目前都会转成pdf，此参数不重要）
+51.	
+COMPANY_POSITION_WHEN_LOGIN_FIRSTTIME=OFF
+52.	当目标文件夹不存在时，是否发送失败消息（ON每次都发送，OFF只在第一
+次发送）
+SMARTFOLDER_SENDFAILUREMESSAGE_EVERYTIME=OFF
+53.	Fuzzy，模糊查找。Exact，精确查找 
+SEARCH_BY_FUZZY=ON
+ON为fuzzy，OFF为exact
+54.	高级搜索是否包含子文件夹
+SET_DOCUMENTS_AND_INCLUDE_SUBFOLDER_DEFAULT=ON
+55.	 
+KEEP_MANUALLY_DOCUMENT_NUMBER=ON
+56.	是否开启在线预览功能
+SUPPORT_VIEWER=ON
+VIEWER_PRINTER_SUPPORT=OFF   是否开启在线预览打印功能
+LIMIT_PAGES_FOR_LISTVIEW=50   最多可打开多少个viewer
+57.	用viewer在线打开附件
+ENABLE_VIEWER_FOR_ATTACHMENTS=ON
+58.	  
+ALLOW_LOCATION=OFF
+59.	默认搜索模式
+DEFAULT_SEARCH_MODE=CLASSIC （CLASSIC，经典模式  GOOGLE，快照模式）
+
+快照模式参数有：
+
+MAXIMUM_ALLOWED_ROWS_SNAPSHOT=5  （最大行数）
+FRAGMENT_SIZE=60
+FRAGMENT_NUMBER=3
+FRAGMENT_SEPARATOR=...
+60.	允许通过外部工具从pdf文件提取文本，且服务器字符编码为utf-8 
+EXTRACT_TEXT_FROM_PDF_BY_EXTERNAL=ON
+PDFTOTEXT_PROG=/opt/quetzaco/base/xpdf/bin/pdftotext
+SERVER_ENCODING=UTF-8
+61.	在用户退出系统时是否清除用户会话
+CLEAR_USER_SESSION_IN_LOGOUT=ON
+62.	显示或隐藏日历模块
+CALENDAR_MODULE_FOR_ORGANIZATION_AND_PROJECT=OFF
+63.	 将mail转换为pdf
+CONVERT_PDF_FOR_MAIL=OFF
+64.	是否分离附件 
+DETACH_ATTACHMENTS_FOR_MAIL=ON
+65.	是否开启ereview功能（ereview在线打开cad图纸插件）
+EREVIEW_SUPPORT=ON （ereview是否开启）
+EREVIEW_SERVER=192.168.1.28  （ereview服务器地址）
+EREVIEW_PORT=8080              （ereview服务端口）
+66.	在线预览视频
+SUPPORT_VIDEO_VIEWER=OFF  （OFF为关闭，ON为打开）
+VIEWER_VIDEO_FORMAT=mpg,3gp,mov,mpeg,vod,avi,wmv,rm,rmvb,asf
+VIEWER_PIC_FORMAT=jpg,jpeg,png,gif  （在线视频支持的格式）
+注：暂时只支持linux服务器
+67.	 自定义报表路径
+CUSTOM_REPORT_XML=/opt/quetzaco/quetapp/cfg/custom_report.xml
+68.	加密参数配置 
+GPG_PROG=/opt/quetzaco/base/gnupg/bin/gpg 
+GPG_HOME=/opt/quetzaco/base/gnupg/etc
+ENCRYPT_FILE_FOR_UPLOADING=ON             （上传文档加密）
+DECRYPT_FILE_FOR_DOWNLOADING=ON         （下载时解密）
+DECRYPT_FILE_FOR_CLIENT=OFF                 （为使用客户端解密）
+69.	  是否使用中文字典
+SUPPORT_ANALYZER_BASED_CHINESE_DICTIONARY=OFF
+70.	AUTOVUE参数配置
+AUTOVUE_SUPPORT=OFF             （是否开启AUTOVUE）
+AUTOVUE_SERVER=192.168.1.7      （AUTOVUE服务器地址）
+AUTOVUE_PORT=80                   （AUTOVUE服务端口）
+71.	是否开启webdav功能
+ENABLE_WEBDAV=ON
+72.	文件转换服务器参数配置
+CONVERT_BY_ACROBAT=OFF              （是否开启使用文件转换服务器）
+CONVERT_FILE_SERVER=192.168.1.152   （文件转换服务器的IP）
+CONVERT_FILE_PORT=8821                （文件转换服务器的端口）
+CONVERT_FILE_TIMEOUT=300000         （文件转换服务器超时时间）
+73.	OCR参数配置
+OCR_SERVER.
+OCR_ENABLE=OFF
+OCR_SERVER=
+OCR_PORT=8821
+OCR_TIMEOUT=300000
+OCR_LANGUAGE=zh_CN
+OCR_PROG=/opt/quetzaco/base/tesseract/bin/tesseract
+74.	是否开启集成登录
+SUPPORT_INTEGRATE_LOGIN=OFF
+75.	在线编辑参数配置
+SOAOFFICE_PLUGIN_ENABLE=ON     （是否开启在线编辑OFF为关闭）
+SOAOFFICE_PLUGIN_CANCOPY=OFF   （在线编辑可复制）
+SOAOFFICE_PLUGIN_CANPRINT=OFF   （在线编辑可打印）
+76.	 
+VALIDATE_INTEGRATE_SERVER_IP=OFF    集成
+77.	下载pdf是是否加水印
+DOWNLOAD_PDF_WITH_WATERMARK=ON   （ON为加，OFF为不加）
+78.	Windows弹窗设置
+AUTOLOGIN_POPUP_WINDOW=OFF
+79.	 
+CUSTOM_SHOW_MY_SPACE_DASHBOARD=OFF
+80.	 中信定制
+SEARCH_MESSAGE_BY_KEY=OFF
+81.	 中信定制
+SUPPORT_PETITION=OFF
+PRINT_PETITION_TITLE=CITIC CONSTRUCTION CO.,LTD.
+82.	点开组织的时候右侧是否直接显示已有的组织  
+LOAD_OBJECTS=OFF
+83.	Webdav最大上传线程
+MAXIMUM_UPLOAD_THREADS=3
+84.	 打开与RTX的开关
+NOTIFY_RTX_NOTE_SWITCH=OFF
+85.	RTX参数配置
+NOTIFY_RTX_HOST=10.1.1.122
+NOTIFY_RTX_PORT=8012
+NOTIFY_RTX_SENDIMG=/SendNotify.cgi?
+NOTIFY_RTX_GETSESSIONKEY=/getsessionkey.cgi?
+86.	SMS参数配置
+NOTIFY_SMS_HOST=10.1.1.126
+NOTIFY_SMS_USER=sa
+NOTIFY_SMS_PASSWORD=Infox1Eies2Sps3Was4!
+NOTIFY_SMS_LOGINNAME=api
+NOTIFY_SMS_LOGINPASSWORD=123456
+87.	是否开启单点域验证登录
+AUTO_LOGON_FOR_AD=OFF  （默认为不开启）
+88.	Mail服务器参数配置
+MAIL_SERVER_HOST=localhost
+MAIL_SERVER_PORT=25
+MAIL_SERVER_AUTH=OFF
+MAIL_SERVER_USER=username
+MAIL_SERVER_PASS=password
+MAIL_SERVER_DOMAIN=test.net
+MAIL_SERVER_FROM=notify@test.net
+MAIL_SERVER_SSL=OFF
+MAIL_SERVER_DEBUG=OFF
+89.	借阅相关
+LENDING=Lending （借阅相关）
+90.	Soaffice模板路径
+SOAOFFICE_TEMPLATES_PATH=/opt/quetzaco/quetapp/cfg/templates/office
+91.	 文档编号替换文件名
+REPLACE_TITLE_BY_FORMAT=OFF   （文档编号替换文件名）
+92.	 在pdf下载是加上客户端的ip水印
+ADD_CLIENT_IP_AS_WATERMARK=OFF
+93.	 检验所定制
+SORT_INDEXCARD_PROP_FIRST_SEPERATOR=
+SORT_INDEXCARD_PROP_LAST_SEPERATOR=
+94.	是否开启用户磁盘限额功能
+ENABLE_USER_QUOTA=OFF   （ON 开启 OFF 关闭）
+95.	ISO参数配置
+RELEASE=RELEASE                        （发布）
+RELEASE_MODIFY=RELEASE_MODIFY      （修订）
+RELEASE_EXPIRE=RELEASE_EXPIRE        （过期）
+RELEASE_DELAY=RELEASE_DELAY          （延期）
+96.	开启ISO功能
+ISO = true  （true）
+97.	HOLA支持的附件格式
+ALLOW_ATTACHMENT_FORMAT=* （*为所有）
+98.	Swf上传方式的开启和允许的最大限制
+ALLOW_SIZE_LIMIT=100
+SWF_UPLOAD_ENABLE=OFF
+99.	在线预览方式
+DOCUMENT_VIEWER=swfviewer   （swfviewer  flexpaper）
+100.	Curl支持gwt
+CURL_GWT=OFF
+101.	队列参数配置
+MAX_QUEUE_SIZE=20000          （每个队列最大处理的文档量）
+MAX_QUEUE_NUMBER=2           （可以同时开启队列的个数）
+QUEUE_PATH=/opt/quetzaco/queue （队列文档的存放路径）
+102.	 ISO邮件模板
+GWT_TPL=ON  （开启后邮件用gwt模板，不开启用hola模板）
+103.	Soaoffice支持的格式 
+SOAOFFICE_PLUGIN_FORMAT=doc|docx|xls|xlsx|ppt|pptx
+104.	 以什么身份向rtx方发送消息
+NOTIFY_RTX_NAME=login_name  （login_name是登录名，full_name是姓加名字）
+
+105.	智能截取文档名填充索引卡
+SET_INDEXCARD_IN_SMARTFOLDER=ON（如果文档命名格式为AAA-BBB-xxxx.doc，则索引卡第一
+第二段值为AAA和BBB）
+DISABLED_PRTSRN=OFF   （防止抓屏）
+106.	
+DEFAULT_PUBLISH_PDF=true      
+SIGNATURES_PATH=/opt/quetzaco/signatures
+107.	 在工具栏右边添加一个“报告”按钮
+SUPPORT_KNOWLEGE_EVALUATION=OFF
+108.	转换文档的方式（ON为队列OFF为线程）
+CONVERT_IN_QUEUE=OFF
+109.	 ISO文档过期提醒时间
+ALERT_MONTH_EXPIRE=1 （默认一个月）
+110.	ISO logo的宽度和高度
+ISO_LOGO_WIDTH=199
+ISO_LOGO_HEIGHT=42
+111.	ISO首页电子签名参数配置（只对pdf有效） 
+IMG_FIRST_HEIGHT=550
+TXT_FIRST_HEIGHT=560
+LINE_SEP=50
+MAX_LINE_NUM=10
+112.	允许登录wendav的用户
+ALLOW_WEBDAV_LOGIN_USERS=*  （*表示所有用户）
+113.	 只允许组织管理员删除组织中的文档柜，文件夹，文档
+DELETE_DMS_ITEM_ONLY_BY_ADMIN=OFF   （对新界面无效，其他用户有权限也无法删除）
+114.	NTKO插件是否开启
+NTKO_PLUGIN_ENABLE=OFF   （soaoffice也需要打开）
+115.	Pdf转swf超时时间
+PROCCESS_WAITFOR_TIMEOUT=1 （默认1分钟，转不出来就不在尝试）
+
+
+
+                                                                                         
+
+
+                                                                                        We Document Your Success                             
+
+德雅科技
+电话：+86.10.6501.3753  ┃  传真：+86.10.6593.1605┃ http://www.deyatech.com
+Copyright© 2004 - 2009 DEYA TECH Co. Ltd.  德雅科技 版权所有
+
+
+	
+	
+	We Document Your Success
+
+
+德雅科技
+电话：+86.10.6501.3753  ┃  传真：+86.10.6593.1605┃ http://www.deyatech.com
+Copyright© 2004 - 2008 DEYA TECH Co. Ltd.  德雅科技 版权所有
+
+
+
+
+
+
+  We Document Your Success
+
+德雅科技
+电话：+86.10.6433.8266 ┃  传真：+86.10.6433.8535┃ http://www.deyatech.com
+Copyright© 2004 - 2012 DEYA TECH Co. Ltd.  德雅科技 版权所有
+

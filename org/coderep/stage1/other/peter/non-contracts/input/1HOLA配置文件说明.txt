@@ -1,0 +1,317 @@
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+　　　　　　　　　　
+
+HOLA系统配置参数说明
+
+
+
+
+
+
+
+
+
+
+德雅科技
+Tel: +86(10) 6501 3753
+Fax: +86(10) 6593 1605
+http://www.deyatech.com
+
+2009
+
+
+配置参数列表
+
+
+
+1.	修改版本号	3
+2.	修改MAIL通知的URL	3
+3.	修改MAIL服务器	3
+4.	修改会话超时时间(单位:毫秒)	3
+5.	修改管理员邮箱地址	3
+6.	修改用户创建的默认密码	3
+7.	修改文件夹下最大文件数量：	4
+8.	修改邮件服务器绑定的域名	4
+9.	修改错误的返回信息	4
+10.	设置是否允许外部邮件	4
+11.	修改欢迎信息	4
+12.	修改显示最大行数	4
+13.	设置JAVA数据库连接池	4
+14.	设置CURL链接的有效期	4
+15.	设置Velocity 的vm文件存放路径	5
+16.	设置HOLA的版本(One/Blue/Gold)	5
+17.	设置模板是否保存	5
+18.	设置反垃圾邮件服务器及端口号	5
+19.	设置邮件病毒扫描服务器及端口号	5
+20.	设置系统级的邮件黑名单列表	5
+21.	设置文档路径的流程图显示的节点名称(已过期)	5
+22.	设置默认字符集	6
+23.	文件夹中是否可以有相同文件标题的文件存在的设置	6
+24.	设置是否显示中间名（针对一些纯外国企业应用）	6
+25.	设置邮件服务器的伪装域名	6
+26.	设置FULL_NAME支持	6
+27.	设置自动创建检索索引信息（批量导入时设为N可提高速度）	6
+28.	是否支持SSO (单点登录模块)	6
+29.	设置默认可下载文件类型的扩展名（逗号分隔）	7
+30.	设置登录名为email地址时所使用的邮件地址类型	7
+31.	设置鼠标双击对文件的操作	7
+32.	设置鼠标双击对用户的操作	7
+33.	设置鼠标双击对任务的操作	7
+34.	对文档柜或文件夹的操作	7
+35.	邮件退信设置	8
+36.	JCRONTAB的配置文件路径	8
+37.	集群的配置	8
+38.	集群节点的配置	8
+39.	支持转换成pdf格式的文件类型扩展名列表	8
+40.	是否对查询结果进行权限过滤	8
+
+
+
+
+在安装目录/opt/quetzaco/quetapp/cfg/ 下存放了一些常用的配置文件，该文档主要说明配置文件
+/opt/quetzaco/quetapp/cfg/quetzacocfg.properties 相关配置参数：
+
+1.	修改版本号
+PRODUCT_VERSION=5.4
+BUILD_VERSION=5.4.x
+2.	修改MAIL通知的URL
+QUETZACO_URL=http://hola.sina.com:80/hola
+3.	修改MAIL服务器
+QUETZACO_MAIL_SERVER=localhost
+4.	修改会话超时时间(单位:毫秒)举例为30分钟
+QUETZACO_SESSION_TIMEOUT=1800000
+5.	修改管理员邮箱地址
+SYS_ADMIN_EMAIL=admin@hola.sina.com
+6.	修改用户创建的默认密码
+DEFAULT_PASSWORD=
+注：如果该项设置为空，则表示HOLA用户创建时默认没有密码，当新用户登录时需要经过想应的设置。
+RESET_LOGIN=N
+当该项设置为NO后用户在第一次登录的时候就不会看到设置密码的页面了。 
+7.	修改文件夹下最大文件数量：
+CHECK_IN_MAX_COUNT=2048
+
+8.	修改邮件服务器绑定的域名
+INTERNAL_DOMAIN_NAME = hola.deyatech.com
+EXTRA_DOMAIN_NAME=hola.deyatech.com
+9.	修改错误的返回信息
+POSTMASTER_ERROR_MSG = Sorry! The Following Mail Ids are Not Found. I don't know where to 
+send the mails
+10.	设置是否允许外部邮件
+ALLOW_EXTERNAL_EMAIL=true
+注：true为允许，false为不允许
+11.	修改欢迎信息
+QUETZACO_WELCOME_MESSAGE_SUBJECT=Welcome to Hola!
+12.	修改显示最大行数
+MAXIMUM_ALLOWED_ROWS=30
+13.	设置JAVA数据库连接池
+DATA_SOURCE=java:/PostgresDS
+14.	设置CURL链接的有效期
+CURL_EXPIRY=90
+15.	设置Velocity 的vm文件存放路径
+VM_ TEMPLATE _PATH=/server/default/deploy/hola.war/templates/
+16.	设置HOLA的版本(One/Blue/Gold)
+FLAVOR_DEFAULT_TYPE=One
+注：已经过期。
+17.	设置模板是否保存
+START_BP=N
+CACHE_BP_FORMS=Y
+18.	设置反垃圾邮件服务器及端口号
+SPAM_ASSASSIN_HOST = localhost
+SPAM_ASSASSIN_PORT = 783
+19.	设置邮件病毒扫描服务器及端口号
+ANTIVIRUS_HOST=localhost
+ANTIVIRUS_PORT=3310
+20.	设置系统级的邮件黑名单列表
+SYSTEM_LEVEL_BLOCK_LIST=,,
+21.	设置文档路径的流程图显示的节点名称(已过期)
+APPROVE=Approve
+REVIEW=Review
+FYI=FYI
+MODIFY=Modify
+DISAPPROVE=Disapprove
+START=Start
+
+22.	设置默认字符集
+ENCODING=UTF-8
+CLIENT_ENCODING=GBK
+
+23.	文件夹中是否可以有相同文件标题的文件存在的设置
+DUPLICATE_DOC_TITLE=OFF
+注：OFF为不可以，ON为可以。
+24.	设置是否显示中间名（针对一些纯外国企业应用）
+SHOW_MIDDLE_NAME=OFF
+25.	设置邮件服务器的伪装域名
+EMAIL_REPLY_DOMAIN=
+26.	设置FULL_NAME支持
+FULL_NAME_SUPPORT=N
+27.	设置自动创建检索索引信息（批量导入时设为N可提高速度）
+AUTO_ADD_INDEX=Y
+注：设定为Y时当用户上传新的文件会自动建立索引，设定为N时则不会建立索引。
+28.	是否支持SSO (单点登录模块)
+SSOSUPPORT=FALSE
+29.	设置默认可下载文件类型的扩展名（逗号分隔）
+DOWNLOAD_FILE_TYPE=
+注：多个添加时用逗号隔开。
+
+30.	设置登录名为email地址时所使用的邮件地址类型
+LOGIN_EMAIL_TYPE=
+注：可使用的选项有PRIMARY_EMAIL和DOMAIN_EMAIL，使用PRIMARY_EMAIL则用户可使用任意其他邮
+箱登录，使用DOMAIN_EMAIL则只能使用本地域邮箱登录，什么也不填默认使用的DOMAIN_NAME.
+31.	设置鼠标双击对文件的操作
+DBLCLICK_ACTION=view
+注：有view和download两个选项，使用view则会双击后通过浏览器打开文件，使用download则会双击打开
+一个下载页面。
+32.	设置鼠标双击对用户的操作
+DBLCLICK_CONTACT_ACTION=view
+注：有edit和view两个选项，如果使用edit选项，在鼠标双击用户时则会弹出一个编辑对话框，如果使用view
+选项则只是查看。
+33.	设置鼠标双击对任务的操作
+DBLCLICK_TASK_ACTION=view
+注：有edit和view两个选项，如果使用edit选项，在鼠标双击则会弹出一个编辑对话框，如果使用view选项
+则只是查看。
+34.	对文档柜或文件夹的操作
+EXPAND_DOCUMENT_TREEVIEW=Y
+注：当选择Y时，鼠标双击打开右边的文件夹左边的目录树会自动打开。N则不打开。
+35.	邮件退信设置
+REJECT_MESSAGE_NO_WAIT=OFF
+注：一般邮件在发送的时候，一次发送不成功还会继续进行三到五次的发送尝试，如果还不能正常发送，则把邮
+件退回（系统退信）。 把该项修改为OFF则表示关闭该功能，一次发送不成功，就不再继续尝试。
+36.	JCRONTAB的配置文件路径
+JCRONTAB_CONFIG=/opt/quetzaco/quetapp/cfg/jcrontab.properties
+37.	集群的配置
+IN_CLUSTER_ENVIRONMENT=N
+注：如果HOLA是工作在集群中，则选择Y
+38.	集群节点的配置
+CLUSTER_NODES=,,
+39.	支持转换成pdf格式的文件类型扩展名列表
+CONVERT_DOCUMENT_FORMAT=doc,xls,ppt,txt,htm,html
+40.	是否对查询结果进行权限过滤
+CHECK_PERMISSION_FOR_SEARCH=ON
+
+41.	CACHE ROOT的工作目录：
+QUETZACO_CACHE_ROOT=/opt/quetzaco/cache
+
+42.	对非活动目录的修改：
+SHOW_DEACTIVE_PROJECTS=OFF
+注：如果为OFF则不可见，如果为ON则可见但不能进行修改。
+
+43.	设置是否可以改变文件的所有者：
+OWNER_FOR_DMS=ON
+
+44.	设置是否新的DOCNUMBER覆盖旧的DOCNUMBER：
+KEEP_DOCNUMBER_VALUE=ON
+
+45.	对文件优先级的设置：
+SMARTFOLDER_WITH_PRIORITY=ON
+注： 当为ON时文件只能有一个最高的优先级，当为OFF时，文件可有多个优先级。
+46.	 修改访问端口：
+修改\opt\quetzaco\quetapp\server\default\deploy\jboss-web.deploy
+修改/opt/quetzaco/quetapp/cfg/quetzacocfg.properties
+\opt\quetzaco\base\WinDaemon\HOLA.ini在ip后加端口号 
+
+查看端口：netstat -nba|find "2098"
+
+修改文件夹curl期限方法在D：/opt/quetzaco/quetapp/cfg/quetzacocfg.properties文件下修改
+CURL_EXPIRY=90
+
+注：90为天数，默认为90天过期
+
+修改cad浏览support autoVue     ON ip 端口
+
+修改登陆同步域AUTO_LOGON_FOR_AD=OFF
+
+放开在线编辑SOAOFFICE_PLUGIN_ENABLE=ON  序列号GNMX-JQSX-JHCZ-18ZPE
+
+双击打开文件为在线编辑DBLCLICK_ACTION=edit-online
+
+修改ip地址/opt/quetzaco/quetapp/cfg/quetzacocfg.properties
+
+           /opt/quetzaco/base/windaemon/hola.ini
+
+http://www.deyatech.com/download/HOLA-Standard-5.4.5-windows.iso
+
+
+注册服务hola.exe –service
+*:\opt\quetzaco\base\WinDaemon\HOLA.exe -service
+Start stop
+注册邮件服务
+见E:\各项目\项目文件\registerDB.bat
+修改邮件服务附件上传最大限制
+修改 （D:）/opt/quetzaco/quetapp/james/apps/james/SAR-INF/config.xml中的
+10240的数字，10240是10M
+
+
+删除服务sc delete "服务名"
+
+升级正式版在线编辑
+删除D:\opt\quetzaco\quetapp\server\default\deploy\hola.war\WEB-INF\lib下的license.lic后重新打开office文件
+
+显示磁盘限额
+ENABLE_USER_QUOTA=OFF
+
+放开webservice接口\opt\quetzaco\quetapp\SOAP运行 publish.bat输入安装端口号按回车 
+
+Linux重启服务
+ 
+Linux查看进程 ps aux|grep java
+Linux查看日志 tail –f /opt/quetzaco/quetapp/logs/nohup.out 
+
+不转换swf：PDF2SWF_PATH=E:/opt/quetzaco/base/swftools/bin/pdf3swf.exe
+
+不转换pdf：关闭ooffice服务
+
+不建索引：AUTO_ADD_INDEX=Y
+
+选择多个文件上传：SWF_UPLOAD_ENABLE=ON
+
+47.	给开发的日志日录及指定文件
+ 
+48.	自动创建索引的配置文件，“Y”是开：
+文件及具体设置如下图
+ 
+
+                                                                                         
+
+
+                                                                                        We Document Your Success                             
+
+德雅科技
+电话：+86.10.6501.3753  ┃  传真：+86.10.6593.1605┃ http://www.deyatech.com
+Copyright© 2004 - 2009 DEYA TECH Co. Ltd.  德雅科技 版权所有
+
+
+	
+	
+	We Document Your Success
+
+
+德雅科技
+电话：+86.10.6501.3753  ┃  传真：+86.10.6593.1605┃ http://www.deyatech.com
+Copyright© 2004 - 2008 DEYA TECH Co. Ltd.  德雅科技 版权所有
+
+
+
+
+	
+
+
+	We Document Your Success
+
+德雅科技
+电话：+86.10.6501.3753  ┃  传真：+86.10.6593.1605┃ http://www.deyatech.com
+Copyright© 2004 - 2008 DEYA TECH Co. Ltd.  德雅科技 版权所有	
+7/11
+
+

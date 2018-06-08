@@ -1,0 +1,10 @@
+﻿一段时间后，一些索引可能损坏，导致查找文档时遗漏
+在后台用工具重新创建索引
+Windows: /opt/quetzaco/quetapp/tools/MainUtil/MainTool.bat  如图1
+　　    图1
+　　
+LINUX系统：如图2
+　　 LINUX ：cd /opt/quetzaco/quetapp/tools/index_util
+        sh reindex.sh quetzaco     如图2
+    图2
+

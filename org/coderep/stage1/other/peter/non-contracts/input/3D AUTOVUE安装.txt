@@ -1,0 +1,75 @@
+﻿1.准备并安装好web server 如:IIS/apache等 
+ 
+2.按向导安装好autovue client-server 
+ 
+3.将autovue安装目录C:\Oracle\AutoVue\html 下 所有文件复制至web server 的网页根目录中(可以在
+根目录下新建jvue文件夹再将复制文件放入此文件夹中)，将cad文件夹下的文件也复制到jvue下。 
+ 
+4.在复制的文件中找到frmapplet.html 文件,编辑下面这段代码 
+ 
+  <!-- BEGIN AutoVue for Java Applet --> 
+  <APPLET 
+    NAME="JVue" 
+ 
+    CODE="com.cimmetry.jvue.JVue.class" 
+    CODEBASE="http://localhost/jvue"  <--修改这里的路径,改成自己的ip 
+    ARCHIVE="jvue.jar,jogl.jar,gluegen-rt.jar" 
+ 
+    HSPACE="0" VSPACE="0" 
+    WIDTH="100%" HEIGHT="100%" MAYSCRIPT> 
+ 
+    <PARAM NAME="EMBEDDED"     VALUE="true"> 
+    <PARAM NAME="VERBOSE"      VALUE="false"> 
+ 
+    <!-- Optional: To call a Javascript function after the applet has initialized --> 
+    <PARAM NAME="ONINIT"       VALUE="onAppletInit();"> 
+ 
+	<!-- Optional: To call a Javascript function after the applet initialization fails --> 
+	<!-- <PARAM NAME="ONINITERROR"       VALUE="onAppletInitError"> --> 
+     
+    <!-- Set FILENAME parameter to the file you want to view at start 
+    <PARAM NAME="FILENAME"     VALUE="http://localhost/jvue/samples/acad12.dwg">  <--修改这
+里的路径，改成自己的ip 
+    --> 
+     
+    <!-- Try direct socket connection  and  servlet tunnelling --> 
+    <PARAM NAME="JVUESERVER"   VALUE="http://localhost/VueServlet;socket://localhost:5099">  
+<--修改这里的路径，改成自己的ip 
+ 
+    <p><b>Requires a browser that supports Java.</b></p> 
+ 
+  </APPLET> 
+  <!-- END AutoVue for Java Applet --> 
+ 
+5.在安装目录的bin\下找到jvueserver.properties 文件,去掉下面三行（标红）前的注释 
+ 
+servlet-engine.classpath=C:\Oracle\AutoVue\bin\jetty\lib\start.jar;C:\Oracle\AutoVue\bin\jetty\lib\jetty-
+6.1.1.jar;C:\Oracle\AutoVue\bin\jetty\lib\jetty-util-6.1.1.jar;C:\Oracle\AutoVue\bin\jetty\lib\servlet-api-2.5-
+6.1.1.jar;C:\Oracle\AutoVue\bin\jetty\lib\jsp-2.1.jar;C:\Oracle\AutoVue\bin\jetty\lib\jsp-api-
+2.1.jar;C:\Oracle\AutoVue\bin\jetty\soap\jasper-compiler.jar;C:\Oracle\AutoVue\bin\jetty\soap\jasper-
+runtime.jar;C:\Oracle\AutoVue\bin\jetty\xerces\xercesImpl.jar;C:\Oracle\AutoVue\bin\jetty\soap\activation.j
+ar;C:\Oracle\AutoVue\bin\jetty\soap\mail.jar;C:\Oracle\AutoVue\bin\jetty\soap\soap.jar;C:\Oracle\AutoVue\
+bin\vueservlet.jar;C:\Oracle\AutoVue\bin\jcert.jar;C:\Oracle\AutoVue\bin\jnet.jar;C:\Oracle\AutoVue\bin\js
+se.jar; 
+ 
+servlet-engine.jre=C:\Oracle\AutoVue\jre\bin\javaw.exe 
+ 
+servlet-engine.cmdline=-Djetty.home="C:\Oracle\AutoVue\bin\jetty" -
+Djetty.home.dir="C:\Oracle\AutoVue\bin\jetty" -Djetty.logs="C:\Oracle\AutoVue\bin\jetty\logs" -
+Dorg.mortbay.util.FileResource.checkAliases=false org.mortbay.start.Main 
+"C:\Oracle\AutoVue\bin\jetty\etc\jetty.xml" 
+ 
+ 
+6.启动autovue server  ,待所有的灯都变绿后即可 
+ 
+7.打开网址为http://主机名:端口/jvue/autovue.html   
+
+
+
+
+  We Document Your Success
+
+德雅科技
+电话：+86.10.6433.8266 ┃  传真：+86.10.6433.8535┃ http://www.deyatech.com
+Copyright© 2004 - 2012 DEYA TECH Co. Ltd.  德雅科技 版权所有
+
